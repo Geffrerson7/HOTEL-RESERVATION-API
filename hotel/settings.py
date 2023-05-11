@@ -43,14 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.postgres',
-    'psqlextra',
     'rest_framework',
     'rest_framework_simplejwt',
     'user',
     'client',
     'roomType',
     'room',
+    'reservation',
 ]
 
 MIDDLEWARE = [
@@ -89,7 +88,7 @@ WSGI_APPLICATION = 'hotel.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'psqlextra.backend',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': env('POSTGRES_DB'),
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),

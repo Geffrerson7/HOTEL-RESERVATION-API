@@ -1,17 +1,13 @@
 from django.db import models
-from enumfields import EnumField
-from enum import Enum
 from django.contrib.auth.models import User
 from room.models import Room
 
-
-class ReservationStatus(Enum):
-    PENDING = 'PENDING'
-    PAID = 'PAID'
-    CANCELED = 'CANCELED'
-
-
 class Reservation(models.Model):
+    STATUS_CHOICES = [
+        ('PENDING', 'PENDING'),
+        ('PAID', 'PAID'),
+        ('CANCELED', 'CANCELED'),
+    ]
 
     @property
     def room_status(self):
@@ -35,7 +31,7 @@ class Reservation(models.Model):
     
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-    status = EnumField(ReservationStatus, default=ReservationStatus.PENDING)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)

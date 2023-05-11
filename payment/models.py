@@ -5,6 +5,10 @@ class Payment(models.Model):
     @property
     def reservation_price(self):
         return self.reservation.amount
+    
+    @property
+    def room_status(self):
+        return self.reservation.room_status
             
     PAYMENT_METHOD_CHOICES = (
         ('bank transfer', 'Wire Transfer'),

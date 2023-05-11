@@ -1,18 +1,7 @@
 from .models import Reservation
 from rest_framework import serializers
 
-
-class ReservationStatusSerializer(serializers.Field):
-    def to_representation(self, value):
-        return value.value
-
-    def to_internal_value(self, data):
-        return Reservation.ReservationStatus(data)
-
-
 class ReservationSerializer(serializers.ModelSerializer):
-    status = ReservationStatusSerializer()
-
     class Meta:
         model = Reservation
         fields = (

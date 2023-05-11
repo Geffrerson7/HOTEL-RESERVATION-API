@@ -16,6 +16,11 @@ class UserViewSet(viewsets.ModelViewSet):
             password=make_password(serializer.validated_data["password"])
         )
     
+    def perform_update(self, serializer):
+        if "password" in serializer.validated_data:
+            serializer.validated_data["password"] = make_password(serializer.validated_data["password"])
+        serializer.save()
+    
 class MyTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)

@@ -5,7 +5,7 @@ It is an API for making online reservations.
 
 ## ERD
 
-
+![HOTEL-API-ERD](https://github.com/Geffrerson7/HOTEL-RESERVATION-API/assets/61089189/9874a368-067e-47d4-8b04-f28a859550c7)
 
 ## Local Installation
 

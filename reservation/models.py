@@ -32,7 +32,7 @@ class Reservation(models.Model):
     date_in = models.DateField()
     date_out = models.DateField()
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
-    amount = models.DecimalField(max_digits=8, decimal_places=2)
+    amount = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
 

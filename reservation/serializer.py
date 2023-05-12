@@ -17,4 +17,4 @@ class ReservationSerializer(serializers.ModelSerializer):
             "client_last_name",
             "client_dni",
         )
-        read_only_fields = ("client_first_name", "client_last_name", "client_dni", "room_status", "room_type")
+        read_only_fields = ("client_first_name", "client_last_name", "client_dni", "room_status", "room_type", "amount",)

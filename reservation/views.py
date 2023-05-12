@@ -11,7 +11,8 @@ class ReservationViewSet(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        room_price = serializer.validated_data['room'].room_price
+        serializer.save(user=self.request.user, amount=room_price)
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user.id)

@@ -24,4 +24,5 @@ urlpatterns = [
     path("roomType/", include("roomType.urls")),
     path("room/", include("room.urls")),
     path("reservation/", include("reservation.urls")),
+    path("payment/", include("payment.urls")),
 ]

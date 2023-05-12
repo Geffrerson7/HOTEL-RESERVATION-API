@@ -5,6 +5,8 @@ from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication
 from reservation.models import Reservation
 from room.models import Room
+from django_filters import rest_framework as filters
+from .filters import PaymentFilter
 
 class PaymentViewSet(viewsets.ModelViewSet):
 
@@ -12,6 +14,9 @@ class PaymentViewSet(viewsets.ModelViewSet):
     serializer_class = PaymentSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [BasicAuthentication]
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class = PaymentFilter
+    filter_class =PaymentFilter
 
     def perform_create(self, serializer):
         reservation_id = self.request.data.get('reservation')
@@ -23,3 +28,9 @@ class PaymentViewSet(viewsets.ModelViewSet):
             reservation.save()
             room.save()
         serializer.save()
+    
+    def get_queryset(self):
+        queryset = Payment.objects.all()
+        user_id = self.request.user.id
+        queryset = queryset.filter(reservation__user__id=user_id)
+        return self.filter_class(self.request.GET, queryset=queryset, request=self.request).qs

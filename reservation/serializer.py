@@ -6,8 +6,8 @@ class ReservationSerializer(serializers.ModelSerializer):
         model = Reservation
         fields = (
             "id",
-            "fecha_inicio",
-            "fecha_fin",
+            "date_in",
+            "date_out",
             "status",
             "amount",
             "room",

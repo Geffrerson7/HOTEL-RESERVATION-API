@@ -7,6 +7,7 @@ from room.models import Room
 from django_filters import rest_framework as filters
 from .filters import PaymentFilter
 
+
 class PaymentViewSet(viewsets.ModelViewSet):
 
     queryset = Payment.objects.all()

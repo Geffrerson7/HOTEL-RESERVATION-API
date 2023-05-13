@@ -1,12 +1,16 @@
 from rest_framework import viewsets
 from .models import RoomType
 from .serializer import RoomTypeSerializer
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 class RoomTypeViewSet(viewsets.ModelViewSet):
     queryset = RoomType.objects.all()
     serializer_class = RoomTypeSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [BasicAuthentication]
+    http_method_names = ["get", "post", "put", "patch", "delete"]
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        else:
+            return [IsAdminUser()]

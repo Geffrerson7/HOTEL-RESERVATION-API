@@ -2,7 +2,6 @@ from .models import Payment
 from .serializer import PaymentSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
-from rest_framework.authentication import BasicAuthentication
 from reservation.models import Reservation
 from room.models import Room
 from django_filters import rest_framework as filters
@@ -13,7 +12,6 @@ class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     permission_classes = [IsAuthenticated]
-    authentication_classes = [BasicAuthentication]
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class = PaymentFilter
     filter_class =PaymentFilter

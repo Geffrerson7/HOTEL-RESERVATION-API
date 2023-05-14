@@ -6,16 +6,18 @@ from reservation.models import Reservation
 from room.models import Room
 from django_filters import rest_framework as filters
 from .filters import PaymentFilter
+from .pagination import StandardResultsSetPagination
 
 
 class PaymentViewSet(viewsets.ModelViewSet):
 
-    queryset = Payment.objects.all()
+    queryset = Payment.objects.all().order_by("id")
     serializer_class = PaymentSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class = PaymentFilter
     filter_class =PaymentFilter
+    pagination_class = StandardResultsSetPagination
 
     def perform_create(self, serializer):
         reservation_id = self.request.data.get('reservation')

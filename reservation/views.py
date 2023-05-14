@@ -3,12 +3,14 @@ from .models import Reservation
 from .serializer import ReservationSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from .pagination import StandardResultsSetPagination
 
 
 class ReservationViewSet(viewsets.ModelViewSet):
-    queryset = Reservation.objects.all()
+    queryset = Reservation.objects.all().order_by('id')
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = StandardResultsSetPagination
 
     def perform_create(self, serializer):
         room_price = serializer.validated_data["room"].room_price
